@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EPAM HOME TASK ON JS</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="epam_javascript_style.css">
+    <style>
+     
+  
+    #data {
+  display:none;
+  background: #f1f1f1;
+  color: #000;
+  position: fit-content;
+  padding: 20px;
+  margin-top: 10px;
+  margin-left: 420px;
+  margin-right: 450px;
+}
+
+#data p {
+  padding: 10px 35px;
+  font-size: 18px;
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+</style>
+    </head>
+    <body>
+    <center class="solid">
+  <form> 
+     <form class="form-inline">
+    
+        <div class = "nav" class="navbar fixed-top navbar-light bg-light"><pre class="navpre"><img class="i1" src="https://icon-library.com/images/graduate-icon/graduate-icon-3.jpg" alt="image" height="50" width="50">         <b>Sign In</b>          X</pre></div><br><br>
+    <div class="row">
+
+        <div class="form-group">
+        <input style="width:25%;" type="text" id="fullname" class="form-control" placeholder="Full Name" required><div id="fullname"></div></div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+        <input style="width:25%;" type="date" id="DOB" class="form-control" placeholder="Date of Birth" required><div id="DOB"></div></div>
+        </div>
+    <div class="row">
+        <div class="form-group">
+        <input style="width:25%;" type="number" id="mobile" class="form-control" placeholder="Mobile Number" required><div id="mob"></div></div>
+        </div>
+        <div class="row">
+        <div class="form-group">
+        <input style="width:25%;" type="email" id="username" class="form-control" placeholder="mail@example.com" required><div id="user"></div></div>
+        </div>
+        <div class="row">
+         <div class="form-group">
+        <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" placeholder="  Set Password" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required></div></div></div>
+    <div class="row">
+         <div class="form-group">
+        <input style="width:25%" type="password" id="password" class="form-control" placeholder="Confirm Password" required><div id="confirm"></div></div></div>
+   <button class="btn btn-primary" onclick="validate();" >Register</button>
+    <script>
+    function visitPage(){
+        window.location='login.html';
+    }
+</script>
+<br>
+
+
+  <br><b>Already have an account? <button class ="btn btn-success" onclick="visitPage();" >Sign In</button>
+    <div id="success"></div>
+
+    </form>
+    </center>
+    </body>
+  <div id="data">
+  <h3>Password must contain the following:</h3>
+  <p id="letter" class="invalid">A <b>lowercase</b> letter</p>
+  <p id="capital" class="invalid">A <b>capital (uppercase)</b> letter</p>
+  <p id="number" class="invalid">A <b>number</b></p>
+  <p id="length" class="invalid">Minimum <b>8 characters</b></p>
+</div>
+        
+
+<script>
+var myInput = document.getElementById("psw");
+var letter = document.getElementById("letter");
+var capital = document.getElementById("capital");
+var number = document.getElementById("number");
+var length = document.getElementById("length");
+
+// When the user clicks on the password field, show the data box
+myInput.onfocus = function() {
+  document.getElementById("data").style.display = "block";
+}
+
+// When the user clicks outside of the password field, hide the data box
+myInput.onblur = function() {
+  document.getElementById("data").style.display = "none";
+}
+
+// When the user starts to type something inside the password field
+myInput.onkeyup = function() {
+  // Validate lowercase letters
+  var lowerCaseLetters = /[a-z]/g;
+  if(myInput.value.match(lowerCaseLetters)) {  
+    letter.classList.remove("invalid");
+    letter.classList.add("valid");
+  } else {
+    letter.classList.remove("valid");
+    letter.classList.add("invalid");
+  }
+  
+  // Validate capital letters
+  var upperCaseLetters = /[A-Z]/g;
+  if(myInput.value.match(upperCaseLetters)) {  
+    capital.classList.remove("invalid");
+    capital.classList.add("valid");
+  } else {
+    capital.classList.remove("valid");
+    capital.classList.add("invalid");
+  }
+
+  // Validate numbers
+  var numbers = /[0-9]/g;
+  if(myInput.value.match(numbers)) {  
+    number.classList.remove("invalid");
+    number.classList.add("valid");
+  } else {
+    number.classList.remove("valid");
+    number.classList.add("invalid");
+  }
+  
+  // Validate length
+  if(myInput.value.length >= 8) {
+    length.classList.remove("invalid");
+    length.classList.add("valid");
+  } else {
+    length.classList.remove("valid");
+    length.classList.add("invalid");
+  }
+}
+</script>
+
+  <script>
+function validate(){
+//alert("h1");
+if(document.getElementById("fullname").value=="")
+{
+  document.getElementById("fullname").innerHTML="<font color=red><i><h5>This field is Required</h5></i></font>";
+  return false;
+}
+if(document.getElementById("DOB").value=="")
+{
+  document.getElementById("DOB").innerHTML="<font color=red><i><h5>This field is Required</h5></i></font>";
+  return false;
+}
+var inputphoneno=document.getElementById("mobile");
+var phoneno = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+  if(!inputphoneno.value.match(phoneno))
+  {
+     //alert("Not a valid Phone Number");
+     document.getElementById("mob").innerHTML="<font color=red><i><h5>Not a valid Phone Number!</h5></i></font>";
+     return false;
+  }
+  var inputemail=document.getElementById("username");
+  var email=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+   if(!inputemail.value.match(email))
+  {
+    document.getElementById("user").innerHTML="<font color=red><i><h5>You have entered an invalid email address!</h5></i></font>";
+    return false;
+  }
+  var psw=document.getElementById("psw");
+  var password=document.getElementById("password");
+  if(psw!=password)
+  {
+    document.getElementById("confirm").innerHTML="<font color=red><i><h5>Confirm Password should be same as the Password.</h5></i></font>";
+  return false;
+  }
+}
+  </script>
+</form>
+</html>
